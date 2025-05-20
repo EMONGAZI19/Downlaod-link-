@@ -248,7 +248,22 @@ document.getElementById('movieForm').addEventListener('submit', function (e) {
   &copy; 2025 Movie Flix. All rights reserved.
 </footer>
 
-<script type='text/javascript' src='//pl26610874.profitableratecpm.com/b0/80/37/b080376e2e859f6c371b8dbef6b33fbf.js'></script>
+<!-- Ad control script -->
+<script>
+  fetch('/config.json')
+    .then(res => res.json())
+    .then(config => {
+      if (config.ads_enabled) {
+        const adScript = document.createElement('script');
+        adScript.type = 'text/javascript';
+        adScript.src = '//pl26610874.profitableratecpm.com/b0/80/37/b080376e2e859f6c371b8dbef6b33fbf.js';
+        document.body.appendChild(adScript);
+      } else {
+        console.log('Ads are disabled.');
+      }
+    })
+    .catch(err => console.error('Failed to load config.json', err));
+</script>
 
 <div class="footer-icons">
   <a href="https://movieflix9.netlify.app/movie-request" class="icon movie-request" title="Request a Movie">
